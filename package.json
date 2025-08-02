@@ -1,0 +1,19 @@
+{
+  "name": "apibay",
+  "version": "1.0.0",
+  "description": "Goodnight World !",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Julien Noailles & Gimenez Luca",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "mysql2": "^3.14.3",
+    "sequelize": "^6.37.7"
+  },
+  "devDependencies": {
+    "@angular/cli": "^20.1.4"
+  }
+}
