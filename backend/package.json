@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "prisma:stuffs": "prisma generate --schema=prisma/schema.prisma && npx prisma migrate dev"
   },
   "author": "faf-dev & Zairth",
   "license": "ISC",
