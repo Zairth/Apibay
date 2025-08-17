@@ -2,12 +2,9 @@
   "name": "apibay",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
-    "prisma:migrate:generate": "npx prisma migrate dev",
-    "prisma:delete:model": "npx prisma migrate reset"
+    "dev": "nodemon index.js"
   },
   "author": "faf-dev & Zairth",
   "license": "ISC",
