@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "prisma:stuffs": "prisma generate --schema=prisma/schema.prisma && npx prisma migrate dev"
+    "prisma:migrate:generate": "npx prisma migrate dev",
+    "prisma:delete:model": "npx prisma migrate reset"
   },
   "author": "faf-dev & Zairth",
   "license": "ISC",
