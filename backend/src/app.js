@@ -10,7 +10,6 @@ const app = express();
 
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
-const errorHandler = require('./middlewares/errorHandler');
 
 // Middlewares globaux
 app.use(express.json());
