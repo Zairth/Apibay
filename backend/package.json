@@ -1,16 +1,18 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "nodemon server.js",
+    "reset": "rm -r prisma/migrations && npx prisma migrate reset --force",
+    "migrate": "npx prisma migrate dev"
   },
   "author": "faf-dev & Zairth",
   "license": "ISC",
   "description": "",
   "dependencies": {
     "@prisma/client": "^6.13.0",
+    "bcrypt": "^6.0.0",
     "dotenv": "^17.2.1",
     "express": "^5.1.0"
   },

@@ -16,8 +16,9 @@ datasource db {
 
 // Simple User model to test database
 model User {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid())
+  username  String   @unique
   email     String   @unique
-  name      String?
+  password  String
   createdAt DateTime @default(now())
 }

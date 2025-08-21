@@ -8,7 +8,7 @@
     "backend"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "arbre": "tree -a -I '.git|node_modules' /home/zairth/Pokemon_Project/Apibay > arborescence.txt"
   },
   "author": "faf-dev & Zairth",
   "license": "ISC",
