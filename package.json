@@ -8,7 +8,7 @@
     "backend"
   ],
   "scripts": {
-    "arbre": "tree -a -I '.git|node_modules' /home/zairth/Pokemon_Project/Apibay > arborescence.txt"
+    "arbre": "tree -a -I '.git|node_modules' /home/zairth/Pokemon_Project/Apibay"
   },
   "author": "faf-dev & Zairth",
   "license": "ISC",

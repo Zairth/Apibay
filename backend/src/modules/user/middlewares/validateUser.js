@@ -23,6 +23,6 @@ module.exports = async (req, res, next) => {
     return res.status(400).json({ error: 'Le mot de passe doit contenir au moins 8 caractères' });
   }
 
-  // Passe au controlleur (Vérification de l'unicité gérée dans le controlleur)
+  // Passe au controlleur (Vérification de l'unicité gérée dans l'errorHandler déclanché dans les controlleurs')
   next();
 };
