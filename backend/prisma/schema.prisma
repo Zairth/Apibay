@@ -19,12 +19,49 @@ enum Role {
   ADMIN
 }
 
-// Simple User model to test database
+enum ObjectState {
+  NEUF
+  BON
+  USÉ      @map("USÉ") // Note: le @map sert a mapper "usé" avec l'accent en BDD
+  ENDOMMAGÉ @map("ENDOMMAGÉ")
+}
+
 model User {
-  id        String   @id @default(uuid())
-  username  String   @unique
-  email     String   @unique
-  password  String
-  role      Role     @default(USER)
-  createdAt DateTime @default(now())
+  id          String   @id @default(uuid())
+  role        Role     @default(USER)
+  pseudo      String   @db.VarChar(50)
+  email       String   @unique @db.VarChar(255)
+  password    String   @db.VarChar(255)
+  cleEbay     String?  @db.VarChar(255)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  collections Collection[]
+}
+
+model Collection {
+  id             String   @id @default(uuid())
+  userId         String   @db.VarChar(36)
+  name           String   @unique @db.VarChar(100)
+  estimatedValue Decimal  @default(0.00) @db.Decimal(10, 2)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  objects Object[] @relation("CollectionObject")
+  
+  @@index([userId])
+}
+
+model Object {
+  id        String      @id @default(uuid())
+  name      String      @db.VarChar(100)
+  category  String      @db.VarChar(50)
+  state     ObjectState
+  value     Decimal     @default(0.00) @db.Decimal(10, 2)
+  image     String?     @db.VarChar(255)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  
+  collections Collection[] @relation("CollectionObject")
 }
