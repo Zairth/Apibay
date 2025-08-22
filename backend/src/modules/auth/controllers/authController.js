@@ -4,25 +4,19 @@ const jwt = require('jsonwebtoken');
 
 const prisma = new PrismaClient();
 
-// POST /auth/login
-exports.login = async (req, res) => {
-  const { email, password } = req.body;
 
-  if (!email || !password) {
-    return res.status(400).json({ error: 'Email et mot de passe requis.' });
-  }
+// *********************** //
+// Authentification Routes //
+// *********************** //
+
+
+// POST /login -> Login d'un utilisateur
+// Middleware "validateUserLogin" appelé avant de Log un utilisateur"
+exports.login = async (req, res) => {
 
   try {
-    const user = await prisma.user.findUnique({ where: { email } });
 
-    if (!user) {
-      return res.status(401).json({ error: 'Identifiants incorrects.' });
-    }
-
-    const passwordMatch = await bcrypt.compare(password, user.password);
-    if (!passwordMatch) {
-      return res.status(401).json({ error: 'Identifiants incorrects.' });
-    }
+    const user = req.user; // injecté par le middleware
 
     // Création du JWT
     const token = jwt.sign(
@@ -31,10 +25,19 @@ exports.login = async (req, res) => {
       { expiresIn: process.env.JWT_EXPIRATION }
     );
 
-    res.json({ token, user: { id: user.id, username: user.username, email: user.email, role: user.role } });
+    res.json({
+      token,
+      user: {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        role: user.role,
+      },
+    });
 
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Erreur lors de l\'authentification.' });
+
+    console.error("Erreur authController.login:", err);
+    res.status(500).json({ error: "Erreur lors de la génération du token." });
   }
 };

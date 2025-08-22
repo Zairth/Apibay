@@ -2,7 +2,7 @@
 CREATE TABLE `User` (
     `id` VARCHAR(191) NOT NULL,
     `role` ENUM('USER', 'ADMIN') NOT NULL DEFAULT 'USER',
-    `pseudo` VARCHAR(50) NOT NULL,
+    `username` VARCHAR(50) NOT NULL,
     `email` VARCHAR(255) NOT NULL,
     `password` VARCHAR(255) NOT NULL,
     `cleEbay` VARCHAR(255) NULL,
@@ -24,11 +24,12 @@ CREATE TABLE `Collection` (
 
     UNIQUE INDEX `Collection_name_key`(`name`),
     INDEX `Collection_userId_idx`(`userId`),
+    UNIQUE INDEX `Collection_name_userId_key`(`name`, `userId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `Object` (
+CREATE TABLE `Item` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(100) NOT NULL,
     `category` VARCHAR(50) NOT NULL,
@@ -42,19 +43,19 @@ CREATE TABLE `Object` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `_CollectionObject` (
+CREATE TABLE `_CollectionItem` (
     `A` VARCHAR(191) NOT NULL,
     `B` VARCHAR(191) NOT NULL,
 
-    UNIQUE INDEX `_CollectionObject_AB_unique`(`A`, `B`),
-    INDEX `_CollectionObject_B_index`(`B`)
+    UNIQUE INDEX `_CollectionItem_AB_unique`(`A`, `B`),
+    INDEX `_CollectionItem_B_index`(`B`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
 ALTER TABLE `Collection` ADD CONSTRAINT `Collection_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `_CollectionObject` ADD CONSTRAINT `_CollectionObject_A_fkey` FOREIGN KEY (`A`) REFERENCES `Collection`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `_CollectionItem` ADD CONSTRAINT `_CollectionItem_A_fkey` FOREIGN KEY (`A`) REFERENCES `Collection`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `_CollectionObject` ADD CONSTRAINT `_CollectionObject_B_fkey` FOREIGN KEY (`B`) REFERENCES `Object`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `_CollectionItem` ADD CONSTRAINT `_CollectionItem_B_fkey` FOREIGN KEY (`B`) REFERENCES `Item`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

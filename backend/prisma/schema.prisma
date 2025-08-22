@@ -19,7 +19,7 @@ enum Role {
   ADMIN
 }
 
-enum ObjectState {
+enum ItemState {
   NEUF
   BON
   USÉ      @map("USÉ") // Note: le @map sert a mapper "usé" avec l'accent en BDD
@@ -29,7 +29,7 @@ enum ObjectState {
 model User {
   id          String   @id @default(uuid())
   role        Role     @default(USER)
-  pseudo      String   @db.VarChar(50)
+  username    String   @db.VarChar(50)
   email       String   @unique @db.VarChar(255)
   password    String   @db.VarChar(255)
   cleEbay     String?  @db.VarChar(255)
@@ -48,20 +48,21 @@ model Collection {
   updatedAt      DateTime @updatedAt
   
   user    User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  objects Object[] @relation("CollectionObject")
+  items Item[] @relation("CollectionItem")
   
   @@index([userId])
+  @@unique([name, userId])
 }
 
-model Object {
+model Item {
   id        String      @id @default(uuid())
   name      String      @db.VarChar(100)
   category  String      @db.VarChar(50)
-  state     ObjectState
+  state     ItemState
   value     Decimal     @default(0.00) @db.Decimal(10, 2)
   image     String?     @db.VarChar(255)
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
   
-  collections Collection[] @relation("CollectionObject")
+  collections Collection[] @relation("CollectionItem")
 }

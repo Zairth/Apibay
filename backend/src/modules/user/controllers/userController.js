@@ -10,7 +10,7 @@ const prisma = new PrismaClient();
 
 // POST /users -> créer un utilisateur
 // Middleware "validateUser" appelé avant de créer un utilisateur"
-exports.createUser = async (req, res, next) => {
+exports.register = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
