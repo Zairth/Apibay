@@ -10,6 +10,6 @@ const prisma = new PrismaClient();
 module.exports = async (req, res, next) => {
 
 
-  // Passe au controlleur (Vérification de l'unicité gérée dans l'errorHandler déclanché dans les controlleurs')
+  // Passe au controlleur
   next();
 };
