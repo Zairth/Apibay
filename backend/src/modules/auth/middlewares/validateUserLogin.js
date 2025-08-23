@@ -10,6 +10,7 @@ const prisma = new PrismaClient();
 
 
 module.exports = async (req, res, next) => {
+
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -17,8 +18,8 @@ module.exports = async (req, res, next) => {
   }
 
   try {
-    const user = await prisma.user.findUnique({ where: { email } });
 
+    const user = await prisma.user.findUnique({ where: { email } });
     if (!user) {
       return res.status(401).json({ error: 'Identifiants incorrects.' });
     }

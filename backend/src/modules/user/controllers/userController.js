@@ -9,7 +9,7 @@ const prisma = new PrismaClient();
 
 
 // POST /users -> créer un utilisateur
-// Middleware "validateUser" appelé avant de créer un utilisateur"
+// Middleware "validateRegister" appelé avant d'arriver ici"
 exports.register = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;

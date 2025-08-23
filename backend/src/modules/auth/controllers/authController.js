@@ -12,7 +12,7 @@ const prisma = new PrismaClient();
 
 // POST /login -> Login d'un utilisateur
 // Middleware "validateUserLogin" appelé avant de Log un utilisateur"
-exports.login = async (req, res) => {
+module.exports = async (req, res) => {
 
   try {
 

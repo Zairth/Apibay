@@ -8,8 +8,8 @@ const express = require('express');
 const app = express();
 
 
-const userRoutes = require('./routes/userRoutes');
-const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./modules/user/routes/userRoutes');
+const authRoutes = require('./modules/auth/routes/authRoutes');
 
 // Middlewares globaux
 app.use(express.json());
