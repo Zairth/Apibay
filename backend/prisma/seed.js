@@ -1,4 +1,6 @@
 const { PrismaClient } = require('@prisma/client');
+const bcrypt = require('bcrypt');
+
 const prisma = new PrismaClient();
 
 
@@ -8,6 +10,7 @@ const prisma = new PrismaClient();
 
 
 async function main() {
+
   // Créer un admin
   const admin = await prisma.user.upsert({
     where: { email: "admin@apibay.com" },
@@ -15,7 +18,7 @@ async function main() {
     create: {
       username: "admin",
       email: "admin@apibay.com",
-      password: "admin", // pense à hasher avec bcrypt
+      password: await bcrypt.hash("admin", 10),
       role: "ADMIN",
     },
   });
@@ -27,7 +30,7 @@ async function main() {
     create: {
       username: "user1",
       email: "user@apibay.com",
-      password: "$2b$10$hashedPasswordIci",
+      password: await bcrypt.hash("user", 10),
       role: "USER",
     },
   });

@@ -35,7 +35,42 @@ exports.register = async (req, res, next) => {
 };
 
 
+// PUT /users/:id -> mettre à jour un utilisateur
+// Middlewares "verifyToken", "isHimselfOrAdmin", "validateUpdate" appelé avant d'arriver ici
+exports.updateUser = async (req, res) => {
+
+  const { id } = req.params;
+  const dataToUpdate = req.dataToUpdate;
+  const user = req.currentUser;
+
+  if (Object.keys(dataToUpdate).length === 0) {
+    return res.status(200).json({ message: "Aucune modification à effectuer." });
+  }
+
+  try {
+
+    const updatedUser = await prisma.user.update({
+      where: { id },
+      data: dataToUpdate,
+    });
+
+    res.json({ message: 'Utilisateur mis à jour.', user: updatedUser });
+
+  } catch (err) {
+
+    if (err.code === 'P2002') {
+      const field = err.meta.target;
+      return res.status(400).json({ error: `${field.includes('email') ? 'Email' : 'Nom d\'utilisateur'} déjà utilisé.` });
+    }
+
+    console.error(err);
+    res.status(500).json({ error: 'Erreur lors de la mise à jour de l\'utilisateur.' });
+  }
+};
+
+
 // GET /users -> récupérer tous les utilisateurs
+// Middlewares "verifyToken" et "isAdmin" appelés avant d'arriver ici
 exports.getUsers = async (req, res) => {
   try {
     const users = await prisma.user.findMany();

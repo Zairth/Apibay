@@ -28,7 +28,7 @@ module.exports = (req, res, next) => {
       role: decoded.role,
     };
 
-    // Passe au controlleur
+    // Passe à la prochaine étape
     next();
 
   } catch (err) {

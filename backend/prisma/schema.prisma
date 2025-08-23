@@ -22,14 +22,14 @@ enum Role {
 enum ItemState {
   NEUF
   BON
-  USÉ      @map("USÉ") // Note: le @map sert a mapper "usé" avec l'accent en BDD
+  USÉ       @map("USÉ") // Note: le @map sert a mapper "usé" avec l'accent en BDD
   ENDOMMAGÉ @map("ENDOMMAGÉ")
 }
 
 model User {
   id          String   @id @default(uuid())
   role        Role     @default(USER)
-  username    String   @db.VarChar(50)
+  username    String   @unique @db.VarChar(50)
   email       String   @unique @db.VarChar(255)
   password    String   @db.VarChar(255)
   cleEbay     String?  @db.VarChar(255)

@@ -14,7 +14,7 @@ const authRoutes = require('./modules/auth/routes/authRoutes');
 // Middlewares globaux
 app.use(express.json());
 
-// Routes users
+// Routes de l'application
 app.use('/users', userRoutes);
 app.use('/auth', authRoutes);
 

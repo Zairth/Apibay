@@ -6,7 +6,7 @@
     "start": "nodemon server.js",
     "reset": "rm -r prisma/migrations && npx prisma migrate reset --force",
     "migrate": "npx prisma migrate dev",
-    "reset:migrate": "rm -r prisma/migrations && npx prisma migrate reset --force && npx prisma migrate dev"
+    "reset:migrate": "rm -r prisma/migrations && npx prisma migrate reset --force && npx prisma migrate dev && node prisma/seed.js"
   },
   "author": "faf-dev & Zairth",
   "license": "ISC",
