@@ -1,6 +1,6 @@
 # ApiBay
 
-ApiBay est une application web et mobile qui rend l'API d'eBay accessible et agréable à utiliser grâce à une interface UI/UX moderne. Le but du projet est de permettre à tout utilisateur d'estimer la valeur de n'importe quelle collection (cartes, objets, etc.) en utilisant des mots-clés envoyés via le site.
+ApiBay est une application web et mobile qui rend l'API d'eBay accessible et agréable à utiliser grâce à une interface UI/UX moderne. Le but du projet est de permettre à tout utilisateur d'estimer la valeur de n'importe quelle collection (cartes, objets, etc.) en utilisant des mots-clés envoyés via notre application.
 
 ## Fonctionnalités principales
 
